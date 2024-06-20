@@ -13,8 +13,8 @@
             var avg = (long)Math.Round(nums.Average());
             var _nums = new List<long>();
             
-            var incSeq = _getSequences(nums, true);
-            var decSeq = _getSequences(nums, false);
+            var incSeq = _getSequences(nums, false);
+            var decSeq = _getSequences(nums, true);
             
             long median = 0;
             nums.Sort();
@@ -54,21 +54,21 @@
             return new List<long>(numArr);
         }
 
-        private List<long> _getSequences(List<long> nums, bool increasing)
+        private List<long> _getSequences(List<long> nums, bool decreasing)
         {
             var bestSeq = new List<long>();
             for (int i = 0; i < nums.Count; i++)
             {
                 var seq = new List<long>() { nums[i] };
-                for (int j = i + 1; j < nums.Count; j++)
+                for (int j = i + 1 ; j < nums.Count; j++)
                 {
-                    if ((nums[j] > seq[j - i - 1]) ^ increasing)
+                    if ((nums[j] > seq[j - i - 1]) ^ decreasing)
                     {
                         seq.Add(nums[j]);
                     }
                     else
                     {
-                        i = j;
+                        i = j - 1;
                         break;
                     }
                 }
